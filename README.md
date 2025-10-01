@@ -2,4 +2,5 @@
 
 ### (1) Project Settings
 
-- GiHub clone
+- GiHub
+- Dockerfile
