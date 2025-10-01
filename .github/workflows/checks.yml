@@ -1,0 +1,29 @@
+# Github Actions CI/CD
+name: Checks # Workflow 이름
+
+on: [push] # git push 이벤트 시 실행
+
+jobs:
+  test-lint: # job ID
+    name: Test and Lint
+    runs-on: ubuntu-20.04 # 작업 환경
+
+    steps:
+      # 도커 허브 로그인
+      - name: Login to Docker Hub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKERHUB_USER }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      # 코드 체크아웃
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      # 테스트 실행
+      - name: Test
+        run: docker-compose run --rm app sh -c "python manage.py test"
+
+      # 코드 스타일 검사
+      - name: Lint
+        run: docker-compose run --rm app sh -c "flake8"
