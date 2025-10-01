@@ -2,4 +2,4 @@
 
 ### (1) Project Settings
 
-- GiHub
+- GiHub clone
